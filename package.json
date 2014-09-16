@@ -1,0 +1,21 @@
+{
+	"name": "search",
+	"version": "0.0.0",
+	"description": "a search engine",	
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/happymap/search.git"
+	},
+	"dependencies": {
+		"express": "~4.3.0",
+    	"mongodb": "~1.3.0",
+    	"mongoose": "~3.6.20"
+	},
+	"devDependencies": {
+		"grunt": "0.4.1"
+	},
+	"engine": {
+		"node": "0.8.22",
+		"npm": "1"
+	}
+}
