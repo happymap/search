@@ -4,13 +4,14 @@ import random
 
 connection_string = 'mongodb://localhost'
 connection = pymongo.Connection(connection_string, safe=True)
-db = connection.ordering
+db = connection.search
 rawstores = db.rawstores
 rawdishes = db.rawdishes
-dishes = db.dishes
+publicdishes = db.publicdishes
+privatedishes = db.privatedishes
 
 batch_size = 100
-offset = 0
+offset = 100001
 count = rawdishes.find().count()
 while (offset < count):
 	batchedDishes = rawdishes.find()[offset : offset + batch_size]
@@ -21,10 +22,11 @@ while (offset < count):
 		name = dish['name']
 		calories = random.randint(100, 1500)
 		serving = random.randint(1, 9)
-		dishes.insert({'brand': brand, 
+		privatedishes.insert({'brand': brand, 
 			'name': name,
 			'calories': calories,
 			'serving': serving,
-			'userId': random.randint(0, 10)})
+			'userId': random.randint(10000, 20000)})
+		print 'inserted successfully'
 		
 	offset += batch_size
