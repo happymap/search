@@ -5,7 +5,19 @@ var Module = function () {
 
 Module.prototype.attachRoutes = function (server) {
 	server.get('/search/:term', this.query);
+	server.get('/search_mongo/:term', this.mongoquery);
 };
+
+Module.prototype.mongoquery = function (req, res, next) {
+	if (req.params.term) {
+		
+
+
+		
+	} else {
+		res.send(400);
+	}
+}
 
 Module.prototype.query = function (req, res, next) {
 	if (req.params.term) {
