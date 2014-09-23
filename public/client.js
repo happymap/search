@@ -22,7 +22,7 @@ function search() {
 				result += '</table>';
 				console.log(data);
 				$('#content').html(result);
-				$('#time').html('time used: ' + data['time'] + 'ms');
+				$('#time').html('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>TIME USED: ' + data['time'] + 'ms </b>');
 			})
 			.fail(function() {
 				alert("error");
@@ -44,7 +44,7 @@ function search() {
 				result += '</table>';
 				console.log(data);
 				$('#content').html(result);
-				$('#time').html('time used: ' + data['time'] + 'ms');
+				$('#time').html('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>TIME USED: ' + data['time'] + 'ms </b');
 			});
 
 		}
