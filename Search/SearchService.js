@@ -1,4 +1,5 @@
-var client = require('../Util/SearchUtil');
+var client = require('../Util/SearchUtil'),
+	SearchPersistence = require('./SearchPersistence');
 
 var Module = function () {
 };
@@ -10,10 +11,18 @@ Module.prototype.attachRoutes = function (server) {
 
 Module.prototype.mongoquery = function (req, res, next) {
 	if (req.params.term) {
-		
-
-
-		
+		var userId = parseInt(req.query.userId);
+		var startTime = new Date().getTime();
+		SearchPersistence.searchMongo(req.params.term, userId, function(err, data) {
+			if (err) {
+				res.send(err);
+			} else {
+				var result = {};
+				result.time = new Date().getTime() - startTime;
+				result.data = data;
+				res.send(result);
+			}
+		});
 	} else {
 		res.send(400);
 	}
