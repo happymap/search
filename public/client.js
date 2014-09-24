@@ -1,9 +1,8 @@
 function search() {
 	var keyword = $('#keyword').val();
 	if (keyword) {
-		console.log('keyword: ' + keyword);
-
-		console.log('method: ' + $('input:radio[name=storage]').filter(":checked").val());
+		// console.log('keyword: ' + keyword);
+		// console.log('method: ' + $('input:radio[name=storage]').filter(":checked").val());
 
 		if ($('input:radio[name=storage]').filter(":checked").val() != 'mongo') {
 
@@ -11,12 +10,12 @@ function search() {
 			.done(function(data) {
 				var i = 0, len = data['data'].length;
 				var result = '';
-				result += '<table border=1><tr><th>Brand</th><th>Name</th><th>public or private</th></tr>'
+				result += '<table border=1><tr><th>Brand</th><th>Name</th><th>public or private</th><th>serving size</th><th>calories</th></tr>'
 				for (; i<len; i++) {
 					if (data['data'][i]['_source']['publicdish']) {
-						result +='<tr><td>' + data['data'][i]['_source']['publicdish']['brand'] + '</td><td>' + data['data'][i]['_source']['publicdish']['name'] + '</td><td>public</td></tr>';
+						result +='<tr><td>' + data['data'][i]['_source']['publicdish']['brand'] + '</td><td>' + data['data'][i]['_source']['publicdish']['name'] + '</td><td>public</td><td>' + data['data'][i]['_source']['publicdish']['serving'] + '</td><td>' + data['data'][i]['_source']['publicdish']['calories'] + '</td></tr>';
 					} else {
-						result +='<tr><td>' + data['data'][i]['_source']['privatedish']['brand'] + '</td><td>' + data['data'][i]['_source']['privatedish']['name'] + '</td><td>' + data['data'][i]['_source']['privatedish']['userId'] + '</td></tr>';
+						result +='<tr><td>' + data['data'][i]['_source']['privatedish']['brand'] + '</td><td>' + data['data'][i]['_source']['privatedish']['name'] + '</td><td>' + data['data'][i]['_source']['privatedish']['userId'] + '</td><td>' + data['data'][i]['_source']['privatedish']['serving'] + '</td><td>' + data['data'][i]['_source']['privatedish']['calories'] +  '</td></tr>';
 					}
 				}
 				result += '</table>';
