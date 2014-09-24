@@ -7,7 +7,7 @@ function search() {
 
 		if ($('input:radio[name=storage]').filter(":checked").val() != 'mongo') {
 
-			$.ajax('http://localhost:3000/search/' + keyword)
+			$.ajax('http://localhost:3000/search/' + keyword + '?userId=' + $('input:text[name=userId]').val())
 			.done(function(data) {
 				var i = 0, len = data['data'].length;
 				var result = '';

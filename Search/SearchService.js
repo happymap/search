@@ -35,6 +35,7 @@ Module.prototype.query = function (req, res, next) {
 		var privateResult = [], publicResult = [], privateFlag = false, publicFlag = false;
 		var result = {};
 		var startTime = new Date().getTime();
+		var userId = req.query.userId;
 
 		//private food
 		client.search({
@@ -42,12 +43,24 @@ Module.prototype.query = function (req, res, next) {
 			type: 'privatedishes',
 			body: {
 				from: 0,
-				size: 20,
+				size: 25,
 				query: {
-					fuzzy_like_this: {
-						like_text: keyword,
-						fields: ["privatedish.brand", "privatedish.name"]
-					}
+					filtered: {
+						filter: {
+							bool: {
+								should: [
+									{ term: {'privatedish.userId': userId }}
+								]
+							}
+						},
+						query: {
+							fuzzy_like_this: {
+								like_text: keyword,
+								fields: ["privatedish.brand", "privatedish.name"]
+							}
+						}
+					},
+					
 				}
 			}
 		}).then(function (body) {
